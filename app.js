@@ -10,8 +10,13 @@ app.set("view engine", "ejs");
 // 静态页面
 // app.use("static", express.static("./public"));// 访问http://localhost:3000/static/js/jquery.js
 app.use(express.static("./public"));// 访问http://localhost:3000/js/jquery.js
+app.use(express.static("./uploads"));
 // get请求 首页
 app.get("/", router.showIndex);// get "/" 异步函数
 app.get("/:albumName", router.showAlbum);
 
+// 404
+app.use(function(req, res){
+  res.render("err");
+})
 app.listen(3000);
