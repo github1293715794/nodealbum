@@ -18,3 +18,24 @@ exports.showIndex = function(req, res, next){
   
 }
 
+exports.showAlbum = function(req, res, next){
+  // 遍历相册中的所有图片
+  var albumName = req.params.albumName;
+  // 具体业务交给model
+  file.getAllImagesByAlbumName(albumName, function(err, imagesArray){
+    if(err){
+      // res.send(err);
+      // 交给下面的中间件
+      next();
+      return;
+    }
+    res.render("album", {
+      "albumname" : albumName,
+      "images" : imagesArray
+    })
+  });
+  // res.render("album", {
+  //   "albumname" : albumName,
+  //   "images" : ["1.jpg", "2.jpg", "3.jpg"]
+  // })
+}
