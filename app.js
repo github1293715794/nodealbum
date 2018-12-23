@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+// 控制器
 var router = require("./controller");// controller 中有package.json文件
 // var router = require("./controller/router.js");// controller中没有package.json文件
 
@@ -14,6 +15,8 @@ app.use(express.static("./uploads"));
 // get请求 首页
 app.get("/", router.showIndex);// get "/" 异步函数
 app.get("/:albumName", router.showAlbum);
+app.get("/up",router.showUp);
+app.post("/up", router.doPost);
 
 // 404
 app.use(function(req, res){
